@@ -9,7 +9,6 @@ use reth_interfaces::Result;
 #[serde(default, rename_all = "camelCase", deny_unknown_fields)]
 #[allow(missing_docs)]
 pub struct AccountExt {
-    pub address: Address,
     pub balance: U256,
     pub nonce: u64,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -106,14 +105,12 @@ impl<Provider> EthExtApiServer for EthExt<Provider>
                 };
 
                 Ok(AccountExt {
-                    address,
                     balance: account.balance,
                     nonce: account.nonce,
                     code_hash,
                 })
             }
             Ok(None) => Ok(AccountExt {
-                address,
                 balance: U256::from(0),
                 nonce: 0,
                 code_hash: None,
