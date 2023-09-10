@@ -1,0 +1,31 @@
+[package]
+name = "reth-custom-api"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# reth
+reth-primitives = { git = "https://github.com/paradigmxyz/reth", tag = "v0.1.0-alpha.8" }
+reth = { git = "https://github.com/paradigmxyz/reth", tag = "v0.1.0-alpha.8" }
+reth-rpc = { git = "https://github.com/paradigmxyz/reth", tag = "v0.1.0-alpha.8" }
+reth-interfaces = { git = "https://github.com/paradigmxyz/reth", tag = "v0.1.0-alpha.8" }
+reth-transaction-pool = { git = "https://github.com/paradigmxyz/reth", tag = "v0.1.0-alpha.8" }
+
+# misc
+clap = { version = "4", features = ["derive"] }
+jsonrpsee = { version = "0.20", features = ["server", "macros"] }
+jsonrpsee-types = { version = "0.20" }
+eyre = "0.6"
+serde_json = "1.0.94"
+serde = { version = "1.0", features = ["derive"] }
+
+# A workaround for https://github.com/paradigmxyz/reth/issues/4537
+[patch.'https://github.com/ethereum/c-kzg-4844']
+c-kzg = { git = " https://github.com/alexchenzl/c-kzg-4844", rev = "666a9de002035eb7e929bceee3a70dee1b23aa93" }
+
+[patch.crates-io]
+revm = { git = "https://github.com/bluealloy/revm/", branch = "release/v25" }
+revm-primitives = { git = "https://github.com/bluealloy/revm/", branch = "release/v25" }
+
